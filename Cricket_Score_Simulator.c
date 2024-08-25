@@ -85,16 +85,13 @@ void playInnings(char teamName[], int *totalScore, int *totalOvers ,int score1) 
 
         team_score += batsman_score;
         printf("\n\n%s = %d/%d\n",teamName, team_score, ++wicket);
-        ovr = (float) ball_count / 6;
-        printf("Overs (%.1f)\n", ovr);
+        int overs = ball_count / 6;
+        int balls = ball_count % 6;
+        float ovr = overs + balls / 10.0;
+        printf("Overs: (%.1f)\n", ovr);
         RR = (float) team_score / ovr;
         printf("Run Rate : %.2f\n", RR);
         printf("%s - %d(%d)\n\n",batsman_name , batsman_score, batsman_faced);
-        
-        /*if (batsman_faced == 10) {
-            break;
-        }*/
-        
         batsman_score = 0;
         wicket_strike = 1;
     }
@@ -119,15 +116,15 @@ int main() {
     scanf("%c",&nul);
     if(toss==2){
         printf("\nFirst Innings\n");
-        playInnings(team2, &score1, &overs1,score1);
-        printf("\n%s scored %d runs in %d overs.\n", team2, score1, overs1/6);
+        playInnings(team2, &score2, &overs2,score1);
+        printf("\n%s scored %d runs in %d overs.\n", team2, score2, overs2/6);
 
         printf("\nSecond Innings\n");
-        playInnings(team1, &score2, &overs2,score1);
-        printf("\n%s scored %d runs in %d overs.\n", team1, score2, overs2/6);
+        playInnings(team1, &score1, &overs1,score2);
+        printf("\n%s scored %d runs in %d overs.\n", team1, score1, overs1/6);
     }else if(toss==1){
         printf("\nFirst Innings\n");
-        playInnings(team1, &score1, &overs1,score1);
+        playInnings(team1, &score1, &overs1,score2);
         printf("\n%s scored %d runs in %d overs.\n", team1, score1, overs1/6);
 
         printf("\nSecond Innings\n");
